@@ -14,5 +14,6 @@ def filter_datum(
     *f, = fields
     res = [re.sub('(?<==).*', redaction, word)
            for word in lst_msg if word.startswith(tuple(f))]
-    result = [w for w in lst_msg if not w.startswith(tuple(f))][:-1] + res
+    result = [w for w in lst_msg if not w.startswith(tuple(f))] + res
+    result.remove('')
     return separator.join(result) + separator
