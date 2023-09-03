@@ -15,4 +15,4 @@ def filter_datum(
     res = [re.sub('(?<==).*', redaction, word)
            for word in lst_msg if word.startswith((a, b))]
     result = [w for w in lst_msg if not w.startswith((a, b))][:-1] + res
-    return separator.join(result) + ";"
+    return separator.join(result) + separator
