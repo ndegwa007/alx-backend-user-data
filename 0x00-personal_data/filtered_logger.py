@@ -26,9 +26,9 @@ def filter_datum(
         if i.startswith(tuple(fields)):
             i = re.sub(r'(?<==).*', redaction, i)
         res += i
-        res += '; '
-    res = res[:-2]
-    return res.strip()
+        if res[-1] != separator:
+            res += separator
+    return res
 
 
 class RedactingFormatter(logging.Formatter):
