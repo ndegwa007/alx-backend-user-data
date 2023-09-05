@@ -9,7 +9,7 @@ def hash_password(password: str) -> bytes:
     salt = bcrypt.gensalt()
     hashed = bcrypt.hashpw(byt, salt)
     return hashed
-    
+
 
 def is_valid(hashed_password: bytes, password: str) -> bool:
     """check password is legit"""
