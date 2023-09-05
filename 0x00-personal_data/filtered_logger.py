@@ -16,11 +16,6 @@ def filter_datum(
         separator: str) -> str:
     """returns the log message obfuscated"""
     lst_msg = message.split(separator)
-#    res = [re.sub('(?<==).*', redaction, word)
-#           for word in lst_msg if word.startswith(tuple(f))]
-#    result = [w for w in lst_msg
-#              if not w.startswith(tuple(f)) if w != ''] + res
-#    return separator.join(result) + separator
     res = ""
     for i in lst_msg:
         if i.startswith(tuple(fields)):
