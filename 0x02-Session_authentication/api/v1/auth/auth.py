@@ -34,8 +34,10 @@ class Auth:
         """auth the curr user"""
         return None
 
-    def session_cookie(self, request=None) -> str:
+    def session_cookie(self, request=None):
         """return cookie value from a request"""
+        if request is None:
+            return None
         self.r = request
         cookie = os.getenv('SESSION_NAME')
         return self.r.cookies.get(cookie)
