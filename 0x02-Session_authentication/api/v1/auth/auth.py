@@ -2,6 +2,7 @@
 """module has a class that manages API authentication"""
 from flask import request
 from typing import List, TypeVar
+import os
 
 
 class Auth:
@@ -32,3 +33,9 @@ class Auth:
     def current_user(self, request=None) -> TypeVar('User'):
         """auth the curr user"""
         return None
+
+    def session_cookie(self, request=None) -> str:
+        """return cookie value from a request"""
+        self.r = request
+        cookie = os.getenv('SESSION_NAME')
+        return self.r.cookies.get(cookie)

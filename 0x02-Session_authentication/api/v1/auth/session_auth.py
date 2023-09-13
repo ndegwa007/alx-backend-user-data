@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """module contains a session auth class"""
 from api.v1.auth.auth import Auth
+from models.user import User
 import uuid
 
 
@@ -22,3 +23,9 @@ class SessionAuth(Auth):
             return None
         user_id = SessionAuth.user_id_by_session_id.get(session_id, None)
         return user_id
+
+    def current_user(self, request=None) -> User:
+        """returns user based on a cookie value"""
+        self.session_id = self.session_cookie(request)
+        self.user_id = self.user_id_for_session_id(self.session_id)
+        return User.get(self.user_id)
