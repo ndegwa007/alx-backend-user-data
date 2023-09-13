@@ -41,8 +41,21 @@ class DB:
         """returns first row found in users table"""
         try:
             self.result = self._session.query(User).filter_by(**kwargs).first()
-            if self.result is None:
-                raise NoResultFound
+        except NoResultFound:
+            return None
         except InvalidRequestError as e:
             raise e
         return self.result
+
+    def update_user(self, user_id, **kwargs) -> None:
+        """update User attribute"""
+        try:
+            user = self.find_user_by(id=user_id)
+            for k, v in kwargs.items():
+                if hasattr(user, k):
+                    setattr(user, k, v)
+                    self._session.commit()
+                else:
+                    raise ValueError
+        except NoResultFound as e:
+            raise e
