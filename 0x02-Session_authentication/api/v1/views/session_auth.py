@@ -13,7 +13,7 @@ def login():
     password = request.form.get('password')
 
     if email == '' or email is None:
-        return jsonify({'error': 'email is missing'}), 400
+        return jsonify({'error': 'email missing'}), 400
 
     if password == '' or password is None:
         return jsonify({'error': 'password missing'}), 400
@@ -26,8 +26,8 @@ def login():
         for user in users:
             if user.is_valid_password(password):
                 user = user
-        if user is None:
-            return jsonify({"error": "wrong password"}), 401
+            else:
+                return jsonify({"error": "wrong password"}), 401
         if user:
             from api.v1.app import auth
             session_id = auth.create_session(user.id)
